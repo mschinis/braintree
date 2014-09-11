@@ -1,6 +1,6 @@
 {
     "name": "mschinis/braintree",
-    "description": "",
+    "description": "A braintree wrapper for Laravel",
     "authors": [
         {
             "name": "Michael Schinis",
