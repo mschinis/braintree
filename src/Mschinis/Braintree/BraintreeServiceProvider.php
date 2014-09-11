@@ -27,7 +27,7 @@ class BraintreeServiceProvider extends ServiceProvider {
         Braintree_Configuration::publicKey(Config::get('braintree::publicKey'));
         Braintree_Configuration::privateKey(Config::get('braintree::privateKey'));
 
-        $encryptionKey = Config::get('braintree::clientSideEncryptionKey');
+        $encryptionKey = Config::get('braintree::CSEKey');
 
         $blade = View::getEngineResolver()->resolve('blade')->getCompiler();
         $blade->extend(function($value, $compiler) use($encryptionKey)
