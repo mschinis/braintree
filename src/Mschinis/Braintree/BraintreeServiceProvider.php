@@ -3,6 +3,7 @@
 use \Illuminate\Support\ServiceProvider;
 use \Illuminate\Support\Facades\Config;
 use \Illuminate\Support\Facades\View;
+use \Illuminate\Support\Facades\Blade;
 use \Braintree_Configuration;
 
 class BraintreeServiceProvider extends ServiceProvider {
@@ -27,14 +28,13 @@ class BraintreeServiceProvider extends ServiceProvider {
         Braintree_Configuration::publicKey(Config::get('braintree::publicKey'));
         Braintree_Configuration::privateKey(Config::get('braintree::privateKey'));
 
-        $encryptionKey = Config::get('braintree::CSEKey');
+        $encryptionKey = Config::get('braintree::config.CSEKey');
 
-        $blade = View::getEngineResolver()->resolve('blade')->getCompiler();
-        $blade->extend(function($value, $compiler) use($encryptionKey)
+        Blade::extend(function($view, $compiler) use ($encryptionKey)
         {
-            $matcher = "/(?<!\w)(\s*)@braintreeClientSideEncryptionKey/";
+            $pattern = $compiler->createPlainMatcher('braintreeCSEKey');
 
-            return preg_replace($matcher, $encryptionKey, $value);
+            return preg_replace($pattern, '$1<?php echo "'.$encryptionKey.'" ?>', $view);
         });
 	}
 
