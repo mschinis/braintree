@@ -1,6 +1,9 @@
 <?php namespace Mschinis\Braintree;
 
-use Illuminate\Support\ServiceProvider;
+use \Illuminate\Support\ServiceProvider;
+use \Illuminate\Support\Facades\Config;
+use \Illuminate\Support\Facades\View;
+use \Braintree_Configuration;
 
 class BraintreeServiceProvider extends ServiceProvider {
 
@@ -19,6 +22,20 @@ class BraintreeServiceProvider extends ServiceProvider {
 	public function boot()
     {
 		$this->package('mschinis/braintree');
+        Braintree_Configuration::environment(Config::get('braintree::environment'));
+        Braintree_Configuration::merchantId(Config::get('braintree::merchantId'));
+        Braintree_Configuration::publicKey(Config::get('braintree::publicKey'));
+        Braintree_Configuration::privateKey(Config::get('braintree::privateKey'));
+
+        $encryptionKey = Config::get('braintree::clientSideEncryptionKey');
+
+        $blade = View::getEngineResolver()->resolve('blade')->getCompiler();
+        $blade->extend(function($value, $compiler) use($encryptionKey)
+        {
+            $matcher = "/(?<!\w)(\s*)@braintreeClientSideEncryptionKey/";
+
+            return preg_replace($matcher, $encryptionKey, $value);
+        });
 	}
 
 	/**
