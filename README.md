@@ -52,13 +52,16 @@ You can setup different environmental configurations by creating matching folder
 You can use the artisan command `php artisan braintree:example` to generate a boilerplate controller that will handle an example payment and an example view with a payment form.
 
 After you generate the files, make sure you add the controller to your routes: `Route::controller('braintree', "BraintreeController");`.
+
 Once the steps above are completed, you can access the test page at `/braintree/test-page`
 
 ### Usage
 
-Once setup, you can use the Braintree PHP classes as spelled out in the [documentation](https://www.braintreepayments.com/docs/php/transactions/overview).
+Once setup, you can use the Braintree PHP classes as spelled out in the [documentation](https://developers.braintreepayments.com/javascript+php/start/overview).
 
+Links to essential information:
+ * [Generating Client Tokens](https://developers.braintreepayments.com/javascript+php/sdk/overview/generate-client-token)
+ * [Drop-in UI](https://developers.braintreepayments.com/javascript+php/start/hello-client)
+ * [Transactions](https://developers.braintreepayments.com/javascript+php/sdk/server/transaction-processing/create)
+ * [Result & Error Handling](https://developers.braintreepayments.com/javascript+php/sdk/server/transaction-processing/result-handling)
 
-### Credits
-
-Thanks to the [Abodeo/laravel-stripe](https://github.com/Abodeo/laravel-stripe) package, as I used it as a starting point.
