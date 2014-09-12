@@ -1,9 +1,11 @@
 <?php namespace Mschinis\Braintree;
 
+use Mschinis\Braintree\BraintreeControllerCommand;
 use \Illuminate\Support\ServiceProvider;
 use \Illuminate\Support\Facades\Config;
 use \Illuminate\Support\Facades\View;
 use \Illuminate\Support\Facades\Blade;
+use \Illuminate\Support\Facades\Artisan;
 use \Braintree_Configuration;
 
 class BraintreeServiceProvider extends ServiceProvider {
@@ -23,6 +25,16 @@ class BraintreeServiceProvider extends ServiceProvider {
 	public function boot()
     {
 		$this->package('mschinis/braintree');
+
+        $this->app->bind('mschinis::command.braintree.example', function($app) {
+            return new BraintreeExampleCommand($app['files']);
+        });
+        $this->commands(array(
+            'mschinis::command.braintree.example'
+        ));
+
+
+
         Braintree_Configuration::environment(Config::get('braintree::environment'));
         Braintree_Configuration::merchantId(Config::get('braintree::merchantId'));
         Braintree_Configuration::publicKey(Config::get('braintree::publicKey'));
