@@ -1,6 +1,7 @@
 {
     "name": "mschinis/braintree",
-    "description": "A braintree wrapper for Laravel",
+    "description": "A Braintree Service provider, wrapper with examples for Laravel",
+    "license": "MIT",
     "authors": [
         {
             "name": "Michael Schinis",
@@ -19,6 +20,9 @@
         "psr-0": {
             "Mschinis\\Braintree\\": "src/"
         }
+    },
+    "support": {
+        "email": "michael@schinis.eu"
     },
     "minimum-stability": "stable"
 }

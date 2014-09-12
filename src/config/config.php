@@ -1,4 +1,5 @@
 <?php
+
 return array(
     'environment'   => 'sandbox',
     'merchantId'    => 'use_your_merchant_id',
