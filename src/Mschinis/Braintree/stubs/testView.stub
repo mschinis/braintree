@@ -34,7 +34,8 @@
 	</style>
 </head>
 <body>
-    {{-- To learn more about the drop-in UI, check https://developers.braintreepayments.com/javascript+php/start/hello-client --}}
+    {{-- To learn more about the drop-in UI,
+     check https://developers.braintreepayments.com/javascript+php/start/hello-client --}}
 	<div class="welcome">
         <form id="checkout" method="post" action="{{action('BraintreeController@postCheckout')}}">
             <div id="dropin"></div>
